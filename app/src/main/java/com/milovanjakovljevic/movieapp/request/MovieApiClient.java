@@ -43,7 +43,7 @@ public class MovieApiClient {
         return mMovies;
     }
 
-
+    //1-This method is called through classes
     public void searchMoviesApi (String query,int pageNumber){
 
         if(retrieveMoviesRunnable!=null){

@@ -38,6 +38,16 @@ public class MovieListActivity extends AppCompatActivity {
 
         movieListViewModel= new ViewModelProvider(this).get(MovieListViewModel.class);
 
+        //Calling observers
+        ObserveAnyChange();
+
+        //Testing Method
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchMovieApi("Fast",1);
+            }
+        });
 
 
     }
@@ -48,13 +58,23 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<MovieModel> movieModels) {
                 //Observing for any change
+                if(movieModels != null){
+                    for(MovieModel movieModel:movieModels){
+                        //Get data in log
+                        Log.v("Tag","onChanged: " + movieModel.getTitle());
+                    }
+                }
             }
         });
     }
 
 
+    // 4- Calling method in main activity
+    private void searchMovieApi(String query,int pageNumber){
+        movieListViewModel.searchMovieApi(query,pageNumber);
+    }
 
-    private void GetRetrofitResponse() {
+   /* private void GetRetrofitResponse() {
 
         MovieApi movieApi = Servicey.getMovieApi();
 
@@ -125,6 +145,8 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    */
 }
 
-//Making search with ID
