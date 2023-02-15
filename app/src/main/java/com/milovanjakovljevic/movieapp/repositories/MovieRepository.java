@@ -1,7 +1,6 @@
 package com.milovanjakovljevic.movieapp.repositories;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.milovanjakovljevic.movieapp.modules.MovieModel;
 import com.milovanjakovljevic.movieapp.request.MovieApiClient;
@@ -11,16 +10,16 @@ import java.util.List;
 public class MovieRepository {
     //Class is acting as repository
 
-    private static MovieRepository instacne;
+    private static MovieRepository instance;
 
     private MovieApiClient movieApiClient;
 
     public static MovieRepository getInstance(){
 
-        if(instacne==null){
-            instacne=new MovieRepository();
+        if(instance ==null){
+            instance =new MovieRepository();
         }
-        return instacne;
+        return instance;
     }
 
     private MovieRepository(){

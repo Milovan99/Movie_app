@@ -61,7 +61,7 @@ public class MovieApiClient {
                     myHandler.cancel(true);
 
             }
-        }, 3000 , TimeUnit.MILLISECONDS);
+        }, 10000 , TimeUnit.MILLISECONDS);
     }
 
 //Retriving data from RestApi by runnable class
