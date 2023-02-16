@@ -1,5 +1,6 @@
 package com.milovanjakovljevic.movieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -99,6 +100,9 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
      //   Toast.makeText(this,"The position"+position,Toast.LENGTH_SHORT).show();
 
+        Intent intent=new Intent(this,MovieDetails.class);
+        intent.putExtra("movie",movieRecyclerAdapter.getSelectedMovie(position));
+        startActivity(intent);
 
     }
 
