@@ -34,7 +34,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         ((MovieViewHolder)holder).title.setText(String.valueOf(mMovies.get(i).getTitle()));
         ((MovieViewHolder)holder).release_date.setText(String.valueOf(mMovies.get(i).getRelease_date()));
-        ((MovieViewHolder)holder).duration.setText(String.valueOf(mMovies.get(i).getRuntime()));
+        ((MovieViewHolder)holder).duration.setText(String.valueOf(mMovies.get(i).getOriginal_language()));
         ((MovieViewHolder)holder).ratingBar.setRating((mMovies.get(i).getVote_average())/2);
 
 

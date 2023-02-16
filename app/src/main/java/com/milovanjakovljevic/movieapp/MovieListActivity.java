@@ -2,6 +2,7 @@ package com.milovanjakovljevic.movieapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -51,7 +52,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
                 if(movieModels != null){
                     for(MovieModel movieModel:movieModels){
                         //Get data in log
-                        Log.v("Tag","onChanged: " + movieModel.getTitle());
+
 
                         movieRecyclerAdapter.setmMovies(movieModels);
                     }
@@ -78,6 +79,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     @Override
     public void onMovieClick(int position) {
 
+        Toast.makeText(this,"The position"+position,Toast.LENGTH_SHORT).show();
     }
 
     @Override
