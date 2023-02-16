@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,17 +37,17 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView=findViewById(R.id.recyclerView);
+        SetupSearchView();
 
+        recyclerView=findViewById(R.id.recyclerView);
         movieListViewModel= new ViewModelProvider(this).get(MovieListViewModel.class);
 
         ConfigureRecyclerView();
         ObserveAnyChange();
-        searchMovieApi("fast",1);
-
-
 
     }
+
+
 
     //Observing data change
     private void ObserveAnyChange(){
@@ -66,12 +67,6 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         });
     }
 
-
-    // 4- Calling method in main activity
-    private void searchMovieApi(String query,int pageNumber){
-        movieListViewModel.searchMovieApi(query,pageNumber);
-    }
-
     // 5 -Initializing recyclerView and adding data to it
 
     private void ConfigureRecyclerView(){
@@ -84,7 +79,9 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     @Override
     public void onMovieClick(int position) {
 
-        Toast.makeText(this,"The position"+position,Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this,"The position"+position,Toast.LENGTH_SHORT).show();
+
+
     }
 
     @Override
@@ -92,80 +89,24 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
     }
 
-
-   /* private void GetRetrofitResponse() {
-
-        MovieApi movieApi = Servicey.getMovieApi();
-
-        Call<MovieSearchResponse> responseCall=movieApi.
-                searchMovie(
-                        Credentials.API_KEY,
-                        "Action",
-                        1);
-
-        responseCall.enqueue(new Callback<MovieSearchResponse>() {
+    private void SetupSearchView() {
+        final SearchView searchView= findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
-                if(response.code()==200){
-                    Log.i("Tag","the response" + response.body().toString());
-
-                    List<MovieModel> movies=new ArrayList<>(response.body().getMovies() );
-
-                    for(MovieModel movie:movies){
-                        Log.v("Tag","The release date "+movie.getRelease_date());
-
-                    }
-                }
-                else {
-                    try {
-                        Log.v("Tag","Error" + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
-
-            }
-        });
-
-
-    }
-
-    private void GetRetrofitResponseAccordingToID(){
-        MovieApi movieApi =Servicey.getMovieApi();
-        Call<MovieModel> responseCall=movieApi
-                .getMovie(550,
-                        Credentials.API_KEY
+            public boolean onQueryTextSubmit(String query) {
+                movieListViewModel.searchMovieApi(
+                        query,
+                        1
                 );
-
-
-
-        responseCall.enqueue(new Callback<MovieModel>() {
-            @Override
-            public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-                if (response.code() == 200) {
-                    MovieModel movie = response.body();
-                    Log.v("Tag", "The response " + movie.getTitle());
-                } else {
-                    try {
-                        Log.v("Tag", "Error" + response.errorBody().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                return false;
             }
 
             @Override
-            public void onFailure(Call<MovieModel> call, Throwable t) {
-
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
     }
 
-
-    */
 }
 
