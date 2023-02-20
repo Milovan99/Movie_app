@@ -23,6 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingLeft="16dp"
+        android:background="@drawable/shadow_back"
         >
 
 
@@ -35,7 +36,8 @@
             android:layout_marginEnd="40dp"
             android:fontFamily="sans-serif-condensed"
             android:text="TextView"
-            android:textSize="20sp"
+            android:textSize="30sp"
+            android:textColor="#E5F1F0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.132"
             app:layout_constraintStart_toStartOf="parent"
