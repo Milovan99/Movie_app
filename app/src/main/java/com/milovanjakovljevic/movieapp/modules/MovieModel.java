@@ -3,6 +3,8 @@ package com.milovanjakovljevic.movieapp.modules;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MovieModel implements Parcelable {
     // Model class for movies
 
@@ -11,7 +13,10 @@ public class MovieModel implements Parcelable {
     private String release_date;
     private int movie_id;
     private float vote_average;
+
+    @SerializedName("overview")
     private String movie_overview;
+
     private String original_language;
 
     // Constructor
