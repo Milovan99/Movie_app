@@ -32,6 +32,7 @@ public class MovieRepository {
     }
 
     public LiveData<List<MovieModel>> getMovies(){return movieApiClient.getMovies();}
+    public LiveData<List<MovieModel>> getPop(){return movieApiClient.getMoviesPop();}
 
     //2-calling method in repository
     public void searchMovieApi(String query,int pageNumber){
@@ -39,6 +40,11 @@ public class MovieRepository {
         mPageNumber=pageNumber;
 
         movieApiClient.searchMoviesApi(query,pageNumber);
+    }
+
+    public void searchMoviePop(int pageNumber){
+        mPageNumber=pageNumber;
+        movieApiClient.searchMoviesPop(pageNumber);
     }
 
     public void searchNextPage(){

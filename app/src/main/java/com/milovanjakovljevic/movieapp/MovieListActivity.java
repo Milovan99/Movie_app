@@ -3,6 +3,7 @@ package com.milovanjakovljevic.movieapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,10 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
     //ViewModel
     private MovieListViewModel movieListViewModel;
+
+    boolean isPop=true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +51,32 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
         ConfigureRecyclerView();
         ObserveAnyChange();
+        ObservePopularMovies();
+
+        movieListViewModel.searchMoviePop(1);
+
+
 
     }
 
+    private void ObservePopularMovies() {
+        movieListViewModel.getPop().observe(this, new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                //Observing for any change
+                if(movieModels != null){
+                    for(MovieModel movieModel:movieModels){
+                        //Get data in log
+
+
+                        movieRecyclerAdapter.setmMovies(movieModels);
+                    }
+                }
+            }
+        });
+
+
+    }
 
 
     //Observing data change
@@ -75,7 +103,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         movieRecyclerAdapter=new MovieRecyclerView(this);
 
         recyclerView.setAdapter(movieRecyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         //RecyclerView Pagination
 
@@ -128,6 +156,17 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
                 return false;
             }
         });
+
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPop=false;
+            }
+        });
+
+
+
     }
 
 }
