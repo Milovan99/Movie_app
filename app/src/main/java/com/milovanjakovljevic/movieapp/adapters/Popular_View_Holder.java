@@ -3,32 +3,25 @@ package com.milovanjakovljevic.movieapp.adapters;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.milovanjakovljevic.movieapp.R;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class Popular_View_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
-    ImageView imageView;
-    RatingBar ratingBar;
-
-    //Click Listener
     OnMovieListener onMovieListener;
+    ImageView imageView22;
+    RatingBar ratingBar22;
 
 
-
-    public MovieViewHolder(@NonNull View itemView, OnMovieListener onMovieListener) {
+    public Popular_View_Holder(@NonNull View itemView,OnMovieListener onMovieListener) {
         super(itemView);
 
         this.onMovieListener=onMovieListener;
-
-
-        imageView=itemView.findViewById(R.id.movie_img);
-        ratingBar=itemView.findViewById(R.id.rating_bar);
+        imageView22=itemView.findViewById(R.id.movie_img_popular);
+        ratingBar22=itemView.findViewById(R.id.rating_bar_pop);
 
         itemView.setOnClickListener(this);
 
@@ -36,6 +29,6 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onClick(View v) {
-        onMovieListener.onMovieClick(getAdapterPosition());
+
     }
 }
